@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Book Updates</title>
+</head>
+<body>
+  <h1>Books (Live WebSocket)</h1>
+  <ol id="list"></ol>
+
+  <script>
+    const ws = new WebSocket("ws://localhost:8000/ws/books");
+
+    ws.onopen = () => {
+      console.log("Connected to WebSocket!");
+    };
+
+    ws.onmessage = (event) => {
+      const books = JSON.parse(event.data);
+      const ol = document.getElementById("list");
+      ol.innerHTML = "";
+      books.forEach(book => {
+        const li = document.createElement("li");
+        li.innerText = `${book.title} by ${book.author} (${book.publication_year})`;
+        ol.appendChild(li);
+      });
+    };
+
+    ws.onclose = () => {
+      console.log("Disconnected from WebSocket.");
+    };
+  </script>
+</body>
+</html>
