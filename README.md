@@ -96,7 +96,7 @@ Deletes book by `id`.
 ### 4. WebSocket for Live Updates 🔁 
 
 ```
-ws://localhost:8000/ws
+ws://localhost:8000/ws/books
 ```
 
 Clients receive the entire updated list of books whenever a change (create/update/delete) is made.
